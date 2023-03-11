@@ -18,5 +18,5 @@ This program requires the **random** module to generate random integers used for
 
 ## Examples
 <p align="center">
-  <img src="doc/SecureEncryption.gif" alt="SecureEncryption" width=75% style="margin-right: 20px"/>
+  <img src="doc/SecureEncryption.gif" alt="SecureEncryption" width=75%"/>
 </p>
