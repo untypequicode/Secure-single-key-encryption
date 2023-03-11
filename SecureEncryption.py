@@ -1,68 +1,91 @@
-from random import randint
+from random import *
 
 def encrypt_message(password: str, message: str) -> str:
     """
-    Fonction pour crypter un message.
+    Cette fonction prend un mot de passe et un message en clair et renvoie le message crypté.
+
+    Arguments:
+    password -- le mot de passe utilisé pour crypter le message
+    message -- le message en clair à crypter
+
+    Renvoie:
+    Le message crypté sous forme de chaîne de caractères
     """
-    # Calcul de la somme de la valeur de chaque caractère du mot de passe.
-    password_sum = sum(ord(char) for char in password)
+    
+    # Générer un entier aléatoire entre 50 et 150 inclus
+    random_int = randint(50,150)
+    # Convertir cet entier en caractère ASCII correspondant
+    random_str = chr(random_int)
 
-    # Calcul du message crypté.
-    encrypted_message = ""
-    for char in message:
-        char_value = ord(char) + password_sum + len(encrypted_message) + 1
-        encrypted_message += chr(char_value)
+    # Calculer la valeur numérique du mot de passe
+    password_value = 0
+    password_cache = password
+    while not password_cache == '' :
+        password_value += ord(password_cache[0])
+        password_cache = password_cache[1:]
+    password_value += random_int
 
-    # Formatage du message crypté.
-    random_int = randint(50, 150)
-    formatted_encrypted_message = chr(password_sum % 26 + 97)
-    formatted_encrypted_message += chr(len(message))
-    formatted_encrypted_message += chr(random_int)
-    formatted_encrypted_message += encrypted_message
+    # Crypter la longueur du message
+    len_message = chr(len(message))
+    # Crypter le message caractère par caractère
+    encrypted_message_cache = ''
+    index = 0
+    message_cache = message
+    while not message_cache == '':
+        encrypted_message_cache += chr(ord(message_cache[0]) + password_value + index + random_int)
+        message_cache = message_cache[1:]
+        index += 1
 
-    return formatted_encrypted_message
+    # Concaténer les différents éléments pour former le message crypté final
+    encrypted_message = chr(password_value)
+    encrypted_message += len_message
+    encrypted_message += random_str
+    encrypted_message += encrypted_message_cache
+
+    # Renvoyer le message crypté
+    return encrypted_message
+
 
 def decrypt_message(password: str, encrypted_message: str) -> str:
     """
-    Fonction pour décrypter un message.
+    Cette fonction prend un mot de passe et un message crypté et renvoie le message en clair correspondant.
+
+    Arguments:
+    password -- le mot de passe utilisé pour crypter le message
+    encrypted_message -- le message crypté à décrypter
+
+    Renvoie:
+    Le message en clair correspondant sous forme de chaîne de caractères
     """
-    # Récupération du caractère qui indique la somme de la valeur de chaque caractère du mot de passe.
-    password_sum_char = encrypted_message[0]
-    password_sum = ord(password_sum_char) - 97
-
-    # Récupération de la longueur du message.
-    message_length_char = encrypted_message[1]
-    message_length = ord(message_length_char)
-
-    # Récupération du caractère aléatoire.
-    random_int_char = encrypted_message[2]
-    random_int = ord(random_int_char)
-
-    # Récupération du message crypté.
-    encrypted_message = encrypted_message[3:]
-    decrypted_message = ""
-    for i, char in enumerate(encrypted_message):
-        char_value = ord(char) - password_sum - i - 1 - random_int
-        decrypted_message += chr(char_value)
-
-    return decrypted_message
-
-# Demande à l'utilisateur s'il veut crypter ou décrypter un message.
-response = input("Do you want to encrypt or decrypt a message? (e/d) ")
-
-if response.lower() == "e":
-    # Cryptage du message.
-    message = input("Enter the message you want to encrypt: ")
-    password = input("Enter the password you want to use to encrypt the message: ")
-    encrypted_message = encrypt_message(password, message)
-    print("Your encrypted message is:", encrypted_message)
     
-elif response.lower() == "d":
-    # Décryptage du message.
-    encrypted_message = input("Enter the encrypted message you want to decrypt: ")
-    password = input("Enter the password used to encrypt the message: ")
-    decrypted_message = decrypt_message(password, encrypted_message)
-    print("Your decrypted message is:", decrypted_message)
-    
-else:
-    print("Invalid response.")
+    # Extraire l'entier aléatoire utilisé pour le cryptage
+    random_str = encrypted_message[2]
+    random_int = ord(random_str)
+
+    # Calculer la valeur numérique du mot de passe
+    password_value = 0
+    password_cache = password
+    while not password_cache == '':
+        password_value += ord(password_cache[0])
+        password_cache = password_cache[1:]
+    password_value = password_value + random_int
+
+    # Vérifier que le mot de passe est correct
+    if chr(password_value) == encrypted_message[0]:
+        print('Your password is valid')
+        # Extraire la longueur du message crypté
+        len_encrypted_message = encrypted_message[1]
+        # Extraire le message crypté
+        encrypted_message_cache = encrypted_message[2:]
+        # Décrypter le message caractère par caractère
+        message_cache = ''
+        index = 0
+        while not encrypted_message_cache == '':
+            message_cache += chr(ord(encrypted_message_cache[0]) - (index + password_value + random_int))
+            encrypted_message_cache = encrypted_message_cache[1:]
+            index += 1
+        message = message_cache
+        # Renvoyer le message en clair correspondant
+        return message
+    else :
+        print('Your password is not valid')
