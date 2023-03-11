@@ -15,3 +15,8 @@ The **decrypt_message()** function takes a password and an encrypted message as 
 ## Dependencies
 
 This program requires the **random** module to generate random integers used for encryption.
+
+## Examples
+<p align="center">
+  <img src="doc/SecureEncryption.gif" alt="SecureEncryption" width=75% style="margin-right: 20px"/>
+</p>
