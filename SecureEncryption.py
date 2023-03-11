@@ -57,26 +57,30 @@ def decrypt_message(password: str, encrypted_message: str) -> str:
     Renvoie:
     Le message en clair correspondant sous forme de chaîne de caractères
     """
-    
+    """
     # Extraire l'entier aléatoire utilisé pour le cryptage
     random_str = encrypted_message[2]
     random_int = ord(random_str)
-
+    """
     # Calculer la valeur numérique du mot de passe
-    password_value = 0
     password_cache = password
+    encrypted_message_cache = encrypted_message
+    password_value = 0
+    random_str = encrypted_message_cache[2]
+    random_int = ord(random_str)
     while not password_cache == '':
         password_value += ord(password_cache[0])
         password_cache = password_cache[1:]
     password_value = password_value + random_int
 
     # Vérifier que le mot de passe est correct
-    if chr(password_value) == encrypted_message[0]:
+    if chr(password_value) == encrypted_message_cache[0]:
         print('Your password is valid')
         # Extraire la longueur du message crypté
-        len_encrypted_message = encrypted_message[1]
+        encrypted_message_cache = encrypted_message_cache[1:]
+        len_encrypted_message = encrypted_message_cache[0]
         # Extraire le message crypté
-        encrypted_message_cache = encrypted_message[2:]
+        encrypted_message_cache = encrypted_message_cache[2:]
         # Décrypter le message caractère par caractère
         message_cache = ''
         index = 0
