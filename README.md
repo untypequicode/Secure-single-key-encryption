@@ -18,7 +18,7 @@ This program requires the ```random``` module to generate random integers used f
 
 ## Examples
 <p align="center">
-  <img src="doc/SecureEncryption.gif" alt="SecureEncryption" width=75%"/>
+  <img src="docs/img/SecureEncryption.gif" alt="SecureEncryption" width=75%"/>
 </p>
 
 ## Authors
