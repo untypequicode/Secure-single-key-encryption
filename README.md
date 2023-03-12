@@ -1,6 +1,6 @@
 # SecureEncryption
 
-This Python module provides two functions, **encrypt_message()** and **decrypt_message()**, for encrypting and decrypting messages using a password.
+This Python module provides two functions, ```encrypt_message()``` and ```decrypt_message()```, for encrypting and decrypting messages using a password.
 
 ## Usage
 
@@ -8,13 +8,13 @@ The program prompts the user to choose whether they want to encrypt or decrypt a
 
 ## Functions
 
-The **encrypt_message()** function takes a password and a message as input and returns the encrypted message as a string.
+The ```encrypt_message()``` function takes a password and a message as input and returns the encrypted message as a string.
 
-The **decrypt_message()** function takes a password and an encrypted message as input and returns the decrypted message as a string.
+The ```decrypt_message()``` function takes a password and an encrypted message as input and returns the decrypted message as a string.
 
 ## Dependencies
 
-This program requires the **random** module to generate random integers used for encryption.
+This program requires the ```random``` module to generate random integers used for encryption.
 
 ## Examples
 <p align="center">
