@@ -20,3 +20,7 @@ This program requires the **random** module to generate random integers used for
 <p align="center">
   <img src="doc/SecureEncryption.gif" alt="SecureEncryption" width=75%"/>
 </p>
+
+## Authors
+
+PixelMaster was created by [@untypequicode](https://github.com/untypequicode)
