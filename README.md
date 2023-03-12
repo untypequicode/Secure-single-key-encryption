@@ -23,4 +23,4 @@ This program requires the **random** module to generate random integers used for
 
 ## Authors
 
-PixelMaster was created by [@untypequicode](https://github.com/untypequicode)
+SecureEncryption was created by [@untypequicode](https://github.com/untypequicode)
